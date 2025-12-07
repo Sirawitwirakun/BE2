@@ -39,12 +39,12 @@ app.listen(3000,() => {
 GET http://localhost:3000/
 ถ้าขึ้น Hello test ก็คือใช้งานได้
 
-###--index.js--
+### --index.js--
 เริ่มเขียน endpoint แรกคือ subject
 const subjectRoutes = require("./routes/subject-routes");
 app.use('/subject', subjectRoutes;)
 
-###--routes/subject-routes.js--
+### --routes/subject-routes.js--
 const express = require("express");
 const router = express.Router();
 
@@ -56,7 +56,7 @@ module.exports = router;
 
 รันใหม่ node index.js แล้ว test ใน postman GET http://localhost:3000/subject expect output = subject route
 
-###--repositories/subject-repo--- //layer repo = ติดต่อกับ database
+### --repositories/subject-repo--- //layer repo = ติดต่อกับ database
 const { PrismaClient } = require(""../generated/prisma");
 const prisma = new PrismaClient();
 
@@ -72,14 +72,14 @@ module.exports = {
 
 
 ----------------------------
-###1. index.js (หรือ app.js)
+### 1. index.js (หรือ app.js)
 จุดเริ่มต้นของแอป
 สร้าง Express app
 เชื่อมต่อ database (ถ้ามี)
 โหลด middleware ต่าง ๆ
 ผูก route หลักเข้ากับแอป
 
-###2. routes
+### 2. routes
 จัดการ เส้นทาง (URL endpoint)
 รับ request จาก client
 ส่งต่อให้ controller ที่เหมาะสม
@@ -87,7 +87,7 @@ module.exports = {
 ตัวอย่าง:
 router.get("/subjects", subjectController.getAllSubjects);
 
-###3. controllers
+### 3. controllers
 รับ request จาก routes
 เรียก service เพื่อทำงาน
 จัดการ response (ส่ง JSON, status code)
@@ -96,19 +96,20 @@ router.get("/subjects", subjectController.getAllSubjects);
 const subjects = await subjectService.getAll();
 res.json(subjects);
 
-###4. services
+### 4. services
 Business logic ทั้งหมดอยู่ที่นี่
 ประมวลผลก่อน–หลังเรียกฐานข้อมูล (validation, calculation)
 เรียก repositories เพื่อเข้าถึงข้อมูล
 ตัวอย่าง:
 return subjectRepository.findAll();
 
-###5. repositories
+### 5. repositories
 ชั้นที่คุยกับ database โดยตรง
 ทำงาน query CRUD ทั้งหมด (SQL/ORM/Mongoose)
 ตัวอย่าง:
 return SubjectModel.find();
 
-###ความสัมพันธ์ทั้งระบบ
+### ความสัมพันธ์ทั้งระบบ
 Client → Routes → Controllers → Services → Repositories → Database
+
 
