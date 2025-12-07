@@ -28,7 +28,9 @@ controllers
 npm install express
 
 ลอง test Backend
-### --index.js--
+
+----------------------------
+### index.js
 const express = require("express");
 const app = express();
 
@@ -43,12 +45,14 @@ app.listen(3000,() => {
 GET http://localhost:3000/
 ถ้าขึ้น Hello test ก็คือใช้งานได้
 
-### --index.js--
+----------------------------
+### index.js
 เริ่มเขียน endpoint แรกคือ subject
 const subjectRoutes = require("./routes/subject-routes");
 app.use('/subject', subjectRoutes;)
 
-### --routes/subject-routes.js--
+----------------------------
+### routes/subject-routes.js
 const express = require("express");
 const router = express.Router();
 
@@ -60,7 +64,8 @@ module.exports = router;
 
 รันใหม่ node index.js แล้ว test ใน postman GET http://localhost:3000/subject expect output = subject route
 
-### --repositories/subject-repo--- //layer repo = ติดต่อกับ database
+----------------------------
+### repositories/subject-repo //layer repo = ติดต่อกับ database
 const { PrismaClient } = require(""../generated/prisma");
 const prisma = new PrismaClient();
 
@@ -70,7 +75,8 @@ module.exports = {
 	}
 }
 
-### --services/subject-service-- //layer service = ดักจับ error ต่างๆของ repo
+----------------------------
+### services/subject-service //layer service = ดักจับ error ต่างๆของ repo
 import function ของ repo มา
 const repo = require("../repositories/subject-repo")
 
@@ -80,7 +86,8 @@ module.exports = {
 	}
 }
 
-### --controllers/subject-controller-- //layer controller = manage สิ่งที่ input มา,validate ข้อมูล
+----------------------------
+### controllers/subject-controller //layer controller = manage สิ่งที่ input มา,validate ข้อมูล
 import service จาก service
 const service = require("../services/subject-service")
 
@@ -91,7 +98,8 @@ module.exports = {
 	}
 }
 
-### --routes/subject-routes.js--
+----------------------------
+### routes/subject-routes.js
 const express = require("express");
 const router = express.Router();
 
@@ -143,6 +151,7 @@ return SubjectModel.find();
 
 ### ความสัมพันธ์ทั้งระบบ
 Client → Routes → Controllers → Services → Repositories → Database
+
 
 
 
