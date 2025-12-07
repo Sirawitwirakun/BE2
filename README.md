@@ -1,9 +1,13 @@
 npm install prisma@6.19 @prisma/client@6.19 dotenv
 npx prisma init
 
-config database_url "mysql//root:password@localhost:3306/databaseName"
+config database_url = "mysql//root:password@localhost:3306/databaseNameOrschemaName"
 
-insert ข้อมูลใน database
+### insert ข้อมูลใน database Webstorm
+กด + แล้วเลือก Data source -> mysql ใส่ user = root,password = mysql@sit
+คลิกขวาที่ @localhost -> new -> schema -> ใส่ชื่อตามที่สั่ง
+ถ้ามี sql script มาให้กดคลิกขวาที่ schema ที่เราสร้าง -> sql script -> run sql script -> เลือกไฟล์ที่ให้มา -> open
+แล้วก็ refresh
 
 เสร็จแล้วไป setup ใน schema.prisma
 แก้ generator client
@@ -66,9 +70,37 @@ module.exports = {
 	}
 }
 
-เดี๋ยวเขียนต่อ ลอง commit ก่อน
+### --services/subject-service-- //layer service = ดักจับ error ต่างๆของ repo
+import function ของ repo มา
+const repo = require("../repositories/subject-repo")
 
+module.exports = {
+	getAllSubject: aync () => {
+		return await prisma.subjects.findmany();
+	}
+}
 
+### --controllers/subject-controller-- //layer controller = manage สิ่งที่ input มา,validate ข้อมูล
+import service จาก service
+const service = require("../services/subject-service")
+
+module.exports = {
+	getAllSubject: aync () => {
+		return await prisma.subjects.findmany();
+		res.json(subject);
+	}
+}
+
+### --routes/subject-routes.js--
+const express = require("express");
+const router = express.Router();
+
+const controller = require("../controllers/subject-controllers");
+router.get("/", controller.getAllSubject);
+
+module.exports = router;
+
+ต่อที่นาที 18:22
 
 
 ----------------------------
@@ -111,5 +143,6 @@ return SubjectModel.find();
 
 ### ความสัมพันธ์ทั้งระบบ
 Client → Routes → Controllers → Services → Repositories → Database
+
 
 
