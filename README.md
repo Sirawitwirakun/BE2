@@ -108,8 +108,7 @@ router.get("/", controller.getAllSubject);
 
 module.exports = router;
 
-ต่อที่นาที 18:22
-
+ที่เหลือก็ดูจากไฟล์เป็นตัวอย่างเอา
 
 ----------------------------
 ### 1. index.js (หรือ app.js)
@@ -151,6 +150,7 @@ return SubjectModel.find();
 
 ### ความสัมพันธ์ทั้งระบบ
 Client → Routes → Controllers → Services → Repositories → Database
+
 
 
 
